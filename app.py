@@ -2,6 +2,8 @@ from config import DevConfig
 from flask import Flask
 from extensions import db
 from blueprints.product.views import product_blueprint
+from models.product import Product
+
 
 def create_app(config_class=DevConfig):
     """
@@ -19,9 +21,10 @@ def create_app(config_class=DevConfig):
     extensions(app)
 
     # Register models
-    # with app.app_context():
-    #     db.create_all()
+    with app.app_context():
+        db.create_all()
     return app
+
 
 def extensions(current_app):
     """
@@ -31,7 +34,9 @@ def extensions(current_app):
     """
     db.init_app(current_app)
 
+
 app = create_app()
+
 
 @app.route('/')
 def home():
