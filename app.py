@@ -2,6 +2,7 @@ from config import DevConfig
 from flask import Flask
 from extensions import db
 from blueprints.product.views import product_blueprint
+
 from models.product import Product
 
 
@@ -44,4 +45,4 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(app, host='0.0.0.0', port='5000', debug=True)
+    app.run(debug=True)
