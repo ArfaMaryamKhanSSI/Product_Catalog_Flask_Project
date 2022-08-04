@@ -1,5 +1,6 @@
 from extensions import db
 from models.model_mixins import ModelMixins
+from models.token import Token
 
 
 class Product(db.Model, ModelMixins):
@@ -9,7 +10,20 @@ class Product(db.Model, ModelMixins):
     date_added = db.Column(db.DateTime, nullable=False)
 
     @classmethod
-    def get_product(cls, name):
-        response = cls.query.filter_by(name=name).first()
+    def get_product(cls, pid):
+        response = cls.query.get(pid)
         return response
+
+    @classmethod
+    def get_all_products(cls):
+        response = cls.query.all()
+        return response
+
+    @classmethod
+    def delete_product(cls, pid):
+        response = cls.query.get(pid)
+        response.delete()
+
+
+
 
